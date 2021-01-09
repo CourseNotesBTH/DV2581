@@ -93,6 +93,8 @@ void perform(int *in_vect, int *out_vect) {
   cudaMalloc(&dev_vect, sizeof(int) * Size);
   cudaMemcpy(dev_vect, in_vect, sizeof(int) * Size, cudaMemcpyHostToDevice);
   
+  // We're using __syncthreads() heavily, so supporting multiple blocks is non-trivial.
+  // Mitigate by wrapping the kernel calls in a for loop instead
   forwardKernel<<<1, Size>>>(dev_vect);
   backwardKernel<<<1, Size>>>(dev_vect);
   cudaSynchronize();
