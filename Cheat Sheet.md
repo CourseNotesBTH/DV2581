@@ -68,7 +68,7 @@ __global__ void perform(float *dev_N, float* dev_M, float *dev_P) {
 }
 ```
 
-## Cumulative sum
+### Cumulative sum
 
 ```c
 #define Size 100
@@ -191,8 +191,8 @@ CUDA streams enables a developer to execute functions concurrently on multiple p
   * Scatter: each thread reads one value and writes to multiple outputs (slow due to synchronization)
   * Gather: each thread reads from multiple values and write to a single data unit (fast, no synchronization)
 * Privatization
-  * Histograms - sum values into a histogram in parallel and conclude the separately
-  * Example: Counting the occurances of the letters in the alphabet in The Bible.
+  * Histograms - sum values into a histogram in parallel and conclude them sequentially
+  * Example: Counting the occurances of the letters in the alphabet in The Bible
 * Thread coarsening
   * Let each thread perform more work. If you have a million of threads, reduce to a hundred thousand and let the threads perform 10x the work. The idea is to lower overhead
 * Data layout transformation (to benefit from memory bursts)
@@ -227,7 +227,7 @@ CUDA streams enables a developer to execute functions concurrently on multiple p
 
 ### Architecture
 
-*GPUs and CPUs are designed in different ways. Explain main the differences and why they are designed differently.*
+*GPUs and CPUs are designed in different ways. Explain the main differences and why they are designed differently.*
 
 GPUs are designed to perform highly parallel processing using techniques such as SIMD. CPUs are typically used for sequential processing.
 
@@ -279,7 +279,7 @@ For example, if the sequential algorithm is considered to be $\mathcal{O}(n^2)$ 
 Example (cumulative sum):
 
 ```python
-// Sequential: O(n)
+# Sequential: O(n)
 int inputs[5] = {1, 2, 3, 4, 5};
 int sums[5] = {0}
 sums[0] = inputs[0];
@@ -309,7 +309,7 @@ See also the previous section about CUDA streams.
 
 _A floating point number consists of three parts. What are these three parts? What does normalization of floating point numbers mean.In what intervals do we not use normalization, and why?_
 
-A IEEE-754 floating-point numbers consist of a **sign**, an **exponent** and a **mantissa**.
+A IEEE-754 floating-point numbers consist of a **sign**, a **mantissa** and an **exponent**.
 
 A floating point number is normalized when the integer part of its mantissa is $1$, the fraction part may be anything . A special case is values around zero, since the requirement of the mantissa being $1$ would not be able to be fulfilled.
 
