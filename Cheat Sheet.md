@@ -102,8 +102,7 @@ void perform(int *in_vect, int *out_vect) {
   
   cudaMemcpy(out_vect, dev_vect, sizeof(int) * Size, cudaMemcpyDeviceToHost);
   
-  cudaFree(dev_in_vect);
-  cudaFree(dev_out_vect);
+  cudaFree(dev_vect);
 }
 ```
 
