@@ -61,10 +61,10 @@ __global__ void perform(float *dev_N, float* dev_M, float *dev_P) {
   int j = threadId % Size;
   if (i >= Size || j >= Size)
     return;
-  shared[threadIdx.x] = M[i * Size + j];
+  shared[threadIdx.x] = dev_M[threadId];
   __syncthreads();
   for(int k = 0; k < Size; k++)
-    dev_P[i * Size + j] += shared[k] * dev_N[k * size + j];
+    dev_P[i * Size + j] += shared[(i * size) % Size + k] * dev_N[k * size + j];
 }
 ```
 
