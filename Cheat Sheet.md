@@ -54,7 +54,7 @@ void perform(float** N, float** M, float** P) {
 ```
 
 ```c
-__global__ void perform(float *dev_N, float* dev_M, float *dev_P) {
+__global__ void kernel(float *dev_N, float* dev_M, float *dev_P) {
   __shared__ float shared[1024] = {0};
   long threadId = blockIdx.x * blockDim.x + threadIdx.x;
   int i = threadId / Size;
