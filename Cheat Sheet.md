@@ -97,7 +97,8 @@ void perform(int *in_vect, int *out_vect) {
   // Mitigate by wrapping the kernel calls in a for loop instead
   forwardKernel<<<1, Size>>>(dev_vect);
   backwardKernel<<<1, Size>>>(dev_vect);
-  cudaSynchronize();
+  
+  cudaDeviceSynchronize();
   
   cudaMemcpy(out_vect, dev_vect, sizeof(int) * Size, cudaMemcpyDeviceToHost);
   
